@@ -1,0 +1,7 @@
+.profile {
+  background-color: #000;
+  display: flex;
+  margin: 40px 200px 0;
+  justify-content: flex-start;
+  align-items: center;
+}
