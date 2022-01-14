@@ -4,9 +4,9 @@
   background-image: url(../../../images/close_icon.svg);
   background-repeat: no-repeat;
   background-size: contain;
-  position: relative;
-  bottom: 40px;
-  left: 40px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
 }
 
 .popup__close:hover {
