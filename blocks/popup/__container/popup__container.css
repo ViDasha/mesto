@@ -4,10 +4,23 @@
   background-color: #fff;
   margin: 195px 425px 195px;
   border-radius: 3%;
-  /*overflow: hidden;*/
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   position: relative;
+}
+
+@media screen and (max-width: 1030px) {
+  .popup__container {
+    margin: 150px 200px 0;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .popup__container {
+    margin: 123px 19px 123px;
+    width: 282px;
+    height: 322px;
+  }
 }

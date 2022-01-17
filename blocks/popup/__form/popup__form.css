@@ -7,3 +7,10 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+@media screen and (max-width: 520px) {
+  .popup__form {
+    margin-top: 25px;
+    margin-left: 22px;
+  }
+}

@@ -14,3 +14,12 @@
   transition: opacity 1s;
   cursor: pointer;
 }
+
+@media screen and (max-width: 520px) {
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    right: 0px;
+    top: -36px;
+  }
+}
