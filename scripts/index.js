@@ -8,12 +8,12 @@ let closeButton = content.querySelector('.popup__close');
 //Отобразить форму с заполненными полями
 function popupOpen() {
   let name = document.querySelector('.profile__name');
-  let description = document.querySelector('.profile__description');
+  let job = document.querySelector('.profile__job');
   let popupName = document.querySelector('.popup__name');
   let popupDesc = document.querySelector('.popup__description');
 
   popupName.value = name.textContent;
-  popupDesc.value = description.textContent;
+  popupDesc.value = job.textContent;
 
   popup.classList.add('popup_opened');
 }
@@ -30,10 +30,10 @@ function formSubmitHandler (evt) {
   let popupName = document.querySelector('.popup__name');
   let popupDesc = document.querySelector('.popup__description');
   let name = document.querySelector('.profile__name');
-  let description = document.querySelector('.profile__description');
+  let job = document.querySelector('.profile__job');
 
   name.textContent = popupName.value;
-  description.textContent = popupDesc.value;
+  job.textContent = popupDesc.value;
   popupClose();
 }
 
