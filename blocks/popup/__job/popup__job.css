@@ -1,4 +1,4 @@
-.popup__description {
+.popup__job {
   width: 358px;
   height: 14px;
   margin-top: 30px;
@@ -11,6 +11,6 @@
   font-weight: 400;
 }
 
-.popup__description:focus {
+.popup__job:focus {
   outline: none;
 }
