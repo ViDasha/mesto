@@ -5,21 +5,21 @@ let popupForm = page.querySelector('.popup__form');
 let editButton = page.querySelector('.profile__edit-button');
 let closeButton = page.querySelector('.popup__close');
 
-let namePr = page.querySelector('.profile__name');
-let job = page.querySelector('.profile__job');
+let profileName = page.querySelector('.profile__name');
+let profileJob = page.querySelector('.profile__job');
 let popupName = document.getElementById('pp-name');
 let popupJob = document.getElementById('pp-job');
 
 //Отобразить форму с заполненными полями
-function popupOpen() {
-  popupName.value = namePr.textContent;
-  popupJob.value = job.textContent;
+function openPopup() {
+  popupName.value = profileName.textContent;
+  popupJob.value = profileJob.textContent;
 
   popup.classList.add('popup_opened');
 }
 
 //Закрыть форму
-function popupClose() {
+function closePopup() {
   popup.classList.remove('popup_opened');
 }
 
@@ -27,11 +27,11 @@ function popupClose() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  namePr.textContent = popupName.value;
-  job.textContent = popupJob.value;
-  popupClose();
+  profileName.textContent = popupName.value;
+  profileJob.textContent = popupJob.value;
+  closePopup();
 }
 
-editButton.addEventListener('click', popupOpen);
-closeButton.addEventListener('click', popupClose);
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
 popupForm.addEventListener('submit', formSubmitHandler);
