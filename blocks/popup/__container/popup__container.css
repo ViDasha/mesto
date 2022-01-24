@@ -1,7 +1,7 @@
 .popup__container {
   width: 430px;
   background-color: #fff;
-  margin: 195px 425px 195px;
+  margin: 0;
   border-radius: 3%;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   display: flex;
