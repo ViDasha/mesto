@@ -1,18 +1,18 @@
-let content = document.querySelector('.content');
-let popup = content.querySelector('.popup');
-let popupForm = content.querySelector('.popup__form');
+let page = document.querySelector('.page');
+let popup = page.querySelector('.popup');
+let popupForm = page.querySelector('.popup__form');
 
-let editButton = content.querySelector('.profile__edit-button');
-let closeButton = content.querySelector('.popup__close');
+let editButton = page.querySelector('.profile__edit-button');
+let closeButton = page.querySelector('.popup__close');
+
+let namePr = page.querySelector('.profile__name');
+let job = page.querySelector('.profile__job');
+let popupName = document.getElementById('pp-name');
+let popupJob = document.getElementById('pp-job');
 
 //Отобразить форму с заполненными полями
 function popupOpen() {
-  let name = document.querySelector('.profile__name');
-  let job = document.querySelector('.profile__job');
-  let popupName = document.querySelector('.popup__name');
-  let popupJob = document.querySelector('.popup__job');
-
-  popupName.value = name.textContent;
+  popupName.value = namePr.textContent;
   popupJob.value = job.textContent;
 
   popup.classList.add('popup_opened');
@@ -27,12 +27,7 @@ function popupClose() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  let popupName = document.querySelector('.popup__name');
-  let popupJob = document.querySelector('.popup__job');
-  let name = document.querySelector('.profile__name');
-  let job = document.querySelector('.profile__job');
-
-  name.textContent = popupName.value;
+  namePr.textContent = popupName.value;
   job.textContent = popupJob.value;
   popupClose();
 }

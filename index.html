@@ -17,74 +17,74 @@
     <main class="content">
       <section class="profile">
         <div class="profile__data">
-          <img src="./images/Avatar.jpg" alt="" class="profile__avatar">
+          <img src="./images/Avatar.jpg" alt="Лицо автора в круглой рамке" class="profile__avatar">
           <div class="profile__info">
             <h1 class="profile__name">Дарья Светлая</h1>
-            <button class="profile__edit-button"></button>
+            <button type="button" aria-label="Редактировать" class="profile__edit-button"></button>
             <p class="profile__job">Фотолюбитель</p>
           </div>
         </div>
-        <button class="profile__add-button"></button>
+        <button type="button" aria-label="Добавить" class="profile__add-button"></button>
       </section>
       <section class="elements">
-        <div class="element">
+        <article class="element">
           <img src="./images/elem_moscow.jpg" alt="Москва" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Москва</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elem_krasnodar.jpg" alt="Краснодар" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Краснодар</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elem_kazan.jpg" alt="Казань" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Казань</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elem_dombai.jpg" alt="Домбай" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Домбай</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elem_baikal.jpg" alt="Байкал" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Байкал</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img src="./images/elem_karac-cherk.jpg" alt="Карачаево-Черкессия" class="element__image">
           <div class="element__panel">
             <h2 class="element__name">Карачаево-Черкессия</h2>
-            <div class="element__like"></div>
+            <button type="button" aria-label="Лайк" class="element__like"></button>
           </div>
-        </div>
-      </section>
-      <section class="popup">
-        <div class="popup__container">
-          <div class="popup__close"></div>
-          <form class="popup__form">
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <input id="pp-name" type="text" name="name" class="popup__name">
-              <input id="pp-job" type="text" name="job" class="popup__job">
-              <input id="pp-save" type="submit" name="save" value="Сохранить" class="popup__button-save">
-          </form>
-        </div>
+        </article>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2021 Mesto Russia</p>
     </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button type="reset" aria-label="Закрыть" name="close" class="popup__close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form method="post" action="#" name="popup-form" class="popup__form">
+            <input id="pp-name" type="text" name="name" class="popup__item">
+            <input id="pp-job" type="text" name="job" class="popup__item">
+            <button id="pp-save" type="submit" aria-label="Сохранить" name="save" class="popup__button-save">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>
