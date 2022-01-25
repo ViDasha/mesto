@@ -1,7 +1,7 @@
 .popup__item {
   width: 358px;
-  margin-top: 54px;
-  padding-bottom: 13px;
+  margin-top: 30px;
+  padding-bottom: 10px;
   padding-top: 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -15,9 +15,16 @@
   outline: none;
 }
 
-@media screen and (max-width: 520px) {
+.popup__item:first-of-type {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 680px) {
   .popup__item {
-    margin-top: 75px;
     width: 238px;
+  }
+
+  .popup__item:first-of-type {
+    margin-top: 75px;
   }
 }
