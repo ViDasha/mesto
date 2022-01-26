@@ -12,15 +12,10 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 960px) {
   .profile__job {
     font-size: 14px;
     line-height: 17px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .profile__job {
-    max-width: 282px;
+    max-width: 280px;
   }
 }
