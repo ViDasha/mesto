@@ -25,19 +25,26 @@ const initialCards = [
   }
 ];
 
-const page = document.querySelector('.page');
-const popup = page.querySelector('.popup');
-const popupForm = page.querySelector('.popup__form');
 const elementTemplate = document.querySelector('#element').content;
 const elements = document.querySelector('.elements');
 
-let editButton = page.querySelector('.profile__edit-button');
-let closeButton = page.querySelector('.popup__close');
+const page = document.querySelector('.page');
+const popupEdit = document.getElementById('pp-edit');
+const popupEditForm = popupEdit.querySelector('.popup__form');
+const popupAdd = document.getElementById('pp-add');
+const popupAddForm = popupAdd.querySelector('.popup__form');
 
-let profileName = page.querySelector('.profile__name');
-let profileJob = page.querySelector('.profile__job');
-let popupName = document.getElementById('pp-name');
-let popupJob = document.getElementById('pp-job');
+const editButton = page.querySelector('.profile__edit-button');
+const addButton = page.querySelector('.profile__add-button');
+const closeButtonEditForm = popupEdit.querySelector('.popup__close');
+const closeButtonAddForm = popupAdd.querySelector('.popup__close');
+
+const profileName = page.querySelector('.profile__name');
+const profileJob = page.querySelector('.profile__job');
+const popupEditName = document.getElementById('pp-edit-name');
+const popupEditJob = document.getElementById('pp-edit-job');
+const popupAddName = document.getElementById('pp-add-name');
+const popupAddSrc = document.getElementById('pp-add-src');
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
@@ -59,29 +66,56 @@ function createCard(card) {
   return element;
 }
 
-//Отобразить форму с заполненными полями
-function openPopup() {
-  popupName.value = profileName.textContent;
-  popupJob.value = profileJob.textContent;
+//Отобразить форму редактирования с заполненными полями
+function openPopupEdit() {
+  popupEditName.value = profileName.textContent;
+  popupEditJob.value = profileJob.textContent;
 
-  popup.classList.add('popup_opened');
+  popupEdit.classList.add('popup_opened');
 }
 
-//Закрыть форму
-function closePopup() {
-  popup.classList.remove('popup_opened');
+//Закрыть форму редактирования
+function closePopupEdit() {
+  popupEdit.classList.remove('popup_opened');
 }
 
-//Закрыть форму с перезаписью значений на главной
-function formSubmitHandler (evt) {
+//Закрыть форму редактирования с перезаписью значений на главной
+function rewriteProfile(evt) {
   evt.preventDefault();
 
-  profileName.textContent = popupName.value;
-  profileJob.textContent = popupJob.value;
-  closePopup();
+  profileName.textContent = popupEditName.value;
+  profileJob.textContent = popupEditJob.value;
+  closePopupEdit();
+}
+
+//Отобразить форму добавления карточки
+function openPopupAdd() {
+  popupAdd.classList.add('popup_opened');
+}
+
+//Закрыть форму создания карточек
+function closePopupAdd() {
+  popupAdd.classList.remove('popup_opened');
+}
+
+//Закрыть форму создания карточки с добавлением карточки в начало
+function addCard(evt) {
+  evt.preventDefault();
+
+  const newCard = {
+    name: popupAddName.value,
+    link: popupAddSrc.value
+  };
+  const cardElement = createCard(newCard);
+  elements.prepend(cardElement);
+  closePopupAdd();
 }
 
 loadInitialCards();
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-popupForm.addEventListener('submit', formSubmitHandler);
+editButton.addEventListener('click', openPopupEdit);
+closeButtonEditForm.addEventListener('click', closePopupEdit);
+popupEditForm.addEventListener('submit', rewriteProfile);
+
+addButton.addEventListener('click', openPopupAdd);
+closeButtonAddForm.addEventListener('click', closePopupAdd);
+popupAddForm.addEventListener('submit', addCard);
