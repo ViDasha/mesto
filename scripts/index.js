@@ -25,9 +25,11 @@ const initialCards = [
   }
 ];
 
-let page = document.querySelector('.page');
-let popup = page.querySelector('.popup');
-let popupForm = page.querySelector('.popup__form');
+const page = document.querySelector('.page');
+const popup = page.querySelector('.popup');
+const popupForm = page.querySelector('.popup__form');
+const elementTemplate = document.querySelector('#element').content;
+const elements = document.querySelector('.elements');
 
 let editButton = page.querySelector('.profile__edit-button');
 let closeButton = page.querySelector('.popup__close');
@@ -39,19 +41,24 @@ let popupJob = document.getElementById('pp-job');
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
-  const elementTemplate = document.querySelector('#element').content;
-  const elements = document.querySelector('.elements');
-  
   initialCards.forEach(item => {
-    const element = elementTemplate.querySelector('.element').cloneNode(true);
-    element.querySelector('.element__image').src = item.link;
-    element.querySelector('.element__image').alt = item.name;
-    element.querySelector('.element__name').textContent = item.name;
-
-    elements.append(element);
+    const newElement = createCard(item);
+    elements.append(newElement);
   });
-
 }
+
+//Создать карточку
+function createCard(card) {
+  const element = elementTemplate.querySelector('.element').cloneNode(true);
+  element.querySelector('.element__image').src = card.link;
+  element.querySelector('.element__image').alt = card.name;
+  element.querySelector('.element__name').textContent = card.name;
+  element.querySelector('.element__like').addEventListener('click', function () {
+    element.querySelector('.element__like').classList.add('element__like_active');
+  });
+  return element;
+}
+
 //Отобразить форму с заполненными полями
 function openPopup() {
   popupName.value = profileName.textContent;
