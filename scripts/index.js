@@ -29,26 +29,28 @@ const elementTemplate = document.querySelector('#element').content;
 const elements = document.querySelector('.elements');
 
 const page = document.querySelector('.page');
+
 const popupEdit = document.getElementById('pp-edit');
+const popupEditForm = popupEdit.querySelector('.popup__form');
+const editButton = page.querySelector('.profile__edit-button');
+const closeButtonEditForm = popupEdit.querySelector('.popup__close');
+const popupEditName = document.getElementById('pp-edit-name');
+const popupEditJob = document.getElementById('pp-edit-job');
+
 const popupImg = document.getElementById('pp-img');
 const imagePopupImg = popupImg.querySelector('.popup__image');
 const namePopupImg = popupImg.querySelector('.popup__name');
-const popupEditForm = popupEdit.querySelector('.popup__form');
-const popupAdd = document.getElementById('pp-add');
-const popupAddForm = popupAdd.querySelector('.popup__form');
 const closeButtonPopupImg = popupImg.querySelector('.popup__close');
 
-const editButton = page.querySelector('.profile__edit-button');
+const popupAdd = document.getElementById('pp-add');
+const popupAddForm = popupAdd.querySelector('.popup__form');
 const addButton = page.querySelector('.profile__add-button');
-const closeButtonEditForm = popupEdit.querySelector('.popup__close');
 const closeButtonAddForm = popupAdd.querySelector('.popup__close');
+const popupAddName = document.getElementById('pp-add-name');
+const popupAddSrc = document.getElementById('pp-add-src');
 
 const profileName = page.querySelector('.profile__name');
 const profileJob = page.querySelector('.profile__job');
-const popupEditName = document.getElementById('pp-edit-name');
-const popupEditJob = document.getElementById('pp-edit-job');
-const popupAddName = document.getElementById('pp-add-name');
-const popupAddSrc = document.getElementById('pp-add-src');
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
