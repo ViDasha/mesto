@@ -30,9 +30,13 @@ const elements = document.querySelector('.elements');
 
 const page = document.querySelector('.page');
 const popupEdit = document.getElementById('pp-edit');
+const popupImg = document.getElementById('pp-img');
+const imagePopupImg = popupImg.querySelector('.popup__image');
+const namePopupImg = popupImg.querySelector('.popup__name');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const popupAdd = document.getElementById('pp-add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
+const closeButtonPopupImg = popupImg.querySelector('.popup__close');
 
 const editButton = page.querySelector('.profile__edit-button');
 const addButton = page.querySelector('.profile__add-button');
@@ -60,6 +64,7 @@ function createCard(card) {
   element.querySelector('.element__image').src = card.link;
   element.querySelector('.element__image').alt = card.name;
   element.querySelector('.element__name').textContent = card.name;
+  element.querySelector('.element__image').addEventListener('click', openImg);
   element.querySelector('.element__like').addEventListener('click', doLike);
   element.querySelector('.element__basket').addEventListener('click', deleteCard);
   return element;
@@ -75,6 +80,20 @@ function doLike(evt) {
 function deleteCard(evt) {
   const elementCard = evt.target.closest('.element');
   elementCard.remove();
+}
+
+//Открыть изображение на весь экран
+function openImg(evt) {
+  const elementImg = evt.target;
+  imagePopupImg.src = elementImg.src;
+  imagePopupImg.alt = elementImg.alt;
+  namePopupImg.textContent = elementImg.closest('.element').querySelector('.element__name').textContent;
+  popupImg.classList.add('popup_opened');
+}
+
+//Закрыть изображение
+function closePopupImg() {
+  popupImg.classList.remove('popup_opened');
 }
 
 //Отобразить форму редактирования с заполненными полями
@@ -130,3 +149,5 @@ popupEditForm.addEventListener('submit', rewriteProfile);
 addButton.addEventListener('click', openPopupAdd);
 closeButtonAddForm.addEventListener('click', closePopupAdd);
 popupAddForm.addEventListener('submit', addCard);
+
+closeButtonPopupImg.addEventListener('click', closePopupImg);
