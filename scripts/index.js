@@ -60,17 +60,21 @@ function createCard(card) {
   element.querySelector('.element__image').src = card.link;
   element.querySelector('.element__image').alt = card.name;
   element.querySelector('.element__name').textContent = card.name;
-  element.querySelector('.element__like').addEventListener('click', function () {
-    element.querySelector('.element__like').classList.add('element__like_active');
-  });
+  element.querySelector('.element__like').addEventListener('click', doLike);
   element.querySelector('.element__basket').addEventListener('click', deleteCard);
   return element;
 }
 
+//Поставить лайк
+function doLike(evt) {
+  const elementLike = evt.target;
+  elementLike.classList.add('element__like_active');
+}
+
 //Удалить карточку
 function deleteCard(evt) {
-  const evtTarget = evt.target.closest('.element');
-  evtTarget.remove();
+  const elementCard = evt.target.closest('.element');
+  elementCard.remove();
 }
 
 //Отобразить форму редактирования с заполненными полями
