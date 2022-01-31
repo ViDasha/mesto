@@ -40,3 +40,6 @@
 @import url(../blocks/popup/__item/popup__item.css);
 @import url(../blocks/popup/__button-save/popup__button-save.css);
 @import url(../blocks/popup/__space/popup__space.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/_darkened/popup_darkened.css);
