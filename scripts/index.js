@@ -90,12 +90,12 @@ function openImg(evt) {
   imagePopupImg.src = elementImg.src;
   imagePopupImg.alt = elementImg.alt;
   namePopupImg.textContent = elementImg.closest('.element').querySelector('.element__name').textContent;
-  popupImg.classList.add('popup_opened');
+  openPopup(popupImg);
 }
 
 //Закрыть изображение
 function closePopupImg() {
-  popupImg.classList.remove('popup_opened');
+  closePopup(popupImg);
 }
 
 //Отобразить форму редактирования с заполненными полями
@@ -103,12 +103,12 @@ function openPopupEdit() {
   popupEditName.value = profileName.textContent;
   popupEditJob.value = profileJob.textContent;
 
-  popupEdit.classList.add('popup_opened');
+  openPopup(popupEdit);
 }
 
 //Закрыть форму редактирования
 function closePopupEdit() {
-  popupEdit.classList.remove('popup_opened');
+  closePopup(popupEdit);
 }
 
 //Закрыть форму редактирования с перезаписью значений на главной
@@ -122,24 +122,30 @@ function rewriteProfile(evt) {
 
 //Отобразить форму добавления карточки
 function openPopupAdd() {
-  popupAdd.classList.add('popup_opened');
+  openPopup(popupAdd);
 }
 
 //Закрыть форму создания карточек
 function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
+  closePopup(popupAdd);
+  popupAddForm.reset();
+}
+
+//Открыть попап
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+//Закрыть попап
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
 
-  const newCard = {
-    name: popupAddName.value,
-    link: popupAddSrc.value
-  };
-  const cardElement = createCard(newCard);
-  elements.prepend(cardElement);
+  elements.prepend(createCard({ name: popupAddName.value, link: popupAddSrc.value }));
   closePopupAdd();
 }
 
