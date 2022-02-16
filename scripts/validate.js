@@ -50,6 +50,25 @@ const setEventListeners = (formElement) => {
 
   setEventListeners(popupEditForm);
 
+  const enableValidation = () => {
+    // Найдём все формы с указанным классом в DOM,
+    // сделаем из них массив методом Array.from
+    const formList = Array.from(document.querySelectorAll('.popup__form'));
+  
+    // Переберём полученную коллекцию
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+        // У каждой формы отменим стандартное поведение
+        evt.preventDefault();
+      });
+  
+      // Для каждой формы вызовем функцию setEventListeners,
+      // передав ей элемент формы
+      setEventListeners(formElement);
+    });
+  };
+
+  enableValidation();
  /*function enableValidation(popup, {
     formSelector: '.popup__form',
     inputSelector: '.popup__item',
