@@ -36,9 +36,11 @@
       <div class="popup__container">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form method="post" action="#" name="popup-form" class="popup__form">
-            <input id="pp-edit-name" type="text" name="name" class="popup__item" placeholder="Имя">
-            <input id="pp-edit-job" type="text" name="job" class="popup__item" placeholder="Занятие">
+        <form method="post" action="#" name="popup-form" class="popup__form" novalidate>
+            <input id="pp-edit-name" type="text" name="name" class="popup__item" placeholder="Имя" minlength="2" maxlength="40" required>
+            <span class="pp-edit-name-error popup__item-error"></span> 
+            <input id="pp-edit-job" type="text" name="job" class="popup__item" placeholder="О себе" minlength="2" maxlength="200" required>
+            <span class="pp-edit-job-error popup__item-error"></span> 
             <button id="pp-edit-save" type="submit" aria-label="Сохранить" name="save" class="popup__button-save">Сохранить</button>
         </form>
       </div>
@@ -47,9 +49,11 @@
       <div class="popup__container">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form method="post" action="#" name="popup-form" class="popup__form">
-            <input id="pp-add-name" type="text" name="name" class="popup__item" placeholder="Название">
-            <input id="pp-add-src" type="text" name="src" class="popup__item" placeholder="Ссылка на картинку">
+        <form method="post" action="#" name="popup-form" class="popup__form" novalidate>
+            <input id="pp-add-name" type="text" name="name" class="popup__item" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="pp-add-name-error popup__item-error"></span> 
+            <input id="pp-add-src" type="url" name="src" class="popup__item" placeholder="Ссылка на картинку" required>
+            <span class="pp-add-src-error popup__item-error"></span> 
             <button id="pp-add-save" type="submit" aria-label="Сохранить" name="save" class="popup__button-save">Сохранить</button>
         </form>
       </div>
@@ -73,5 +77,6 @@
     </template>
   </div>
   <script src="./scripts/index.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 </html>

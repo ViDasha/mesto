@@ -102,7 +102,6 @@ function closePopupImg() {
 function openPopupEdit() {
   popupEditName.value = profileName.textContent;
   popupEditJob.value = profileJob.textContent;
-
   openPopup(popupEdit);
 }
 
