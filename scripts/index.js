@@ -155,8 +155,8 @@ popupEditForm.addEventListener('submit', rewriteProfile);
 
 document.addEventListener('keydown', function (evt) {
   if ((evt.key === "Escape") || (evt.key === "Esc")) {
-    const popupr = document.getElementsByClassName('popup_opened');
-    switch (popupr[0].id) { 
+    const popupOpened = document.getElementsByClassName('popup_opened');
+    switch (popupOpened[0].id) { 
       case 'pp-add': closePopupAdd();
       case 'pp-edit': closePopupEdit();
       case 'pp-img': closePopupImg();
