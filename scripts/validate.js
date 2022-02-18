@@ -27,6 +27,30 @@ const isValid = (formElement, formInput) => {
   }
 };
 
+const hasInvalidInput = (inputList) => {
+  // проходим по этому массиву методом some
+  return inputList.some((inputElement) => {
+    // Если поле не валидно, колбэк вернёт true
+    // Обход массива прекратится и вся фунцкция
+    // hasInvalidInput вернёт true
+
+    return !inputElement.validity.valid;
+  })
+}; 
+
+const toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
+    // сделай кнопку неактивной
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add('popup__button-save_inactive');
+  } else {
+    // иначе сделай кнопку активной
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove('popup__button-save_inactive');
+  }
+}; 
+
 popupEditForm.addEventListener('submit', function (evt) {
     // Отменим стандартное поведение
   evt.preventDefault();
@@ -36,7 +60,9 @@ const setEventListeners = (formElement) => {
     // Находим все поля внутри формы,
     // сделаем из них массив методом Array.from
     const inputList = Array.from(formElement.querySelectorAll('.popup__item'));
-  
+    const buttonElement = formElement.querySelector('.popup__button-save');
+
+    toggleButtonState(inputList, buttonElement);
     // Обойдём все элементы полученной коллекции
     inputList.forEach((inputElement) => {
       // каждому полю добавим обработчик события input
@@ -44,11 +70,13 @@ const setEventListeners = (formElement) => {
         // Внутри колбэка вызовем isValid,
         // передав ей форму и проверяемый элемент
         isValid(formElement, inputElement)
+
+        toggleButtonState(inputList, buttonElement);
       });
     });
   }; 
 
-  setEventListeners(popupEditForm);
+  /*setEventListeners(popupEditForm);*/
 
   const enableValidation = () => {
     // Найдём все формы с указанным классом в DOM,
@@ -78,3 +106,4 @@ const setEventListeners = (formElement) => {
     errorClass: 'popup__error_visible'
   }) {};
   */
+
