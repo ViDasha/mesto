@@ -1,7 +1,0 @@
-.popup__space {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
