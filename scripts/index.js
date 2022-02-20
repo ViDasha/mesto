@@ -96,7 +96,7 @@ function deleteCard(evt) {
 //Сбросить ошибки в spans в форме
 function resetErrorList(popup) {
   const popupItems = Array.from(popup.getElementsByClassName('popup__item'));
-  popupItems.forEach((item) => hideInputError(popup, item));
+  popupItems.forEach((item) => hideInputError(popup, item, listValidationAttribute));
 }
 
 //Открыть изображение на весь экран
