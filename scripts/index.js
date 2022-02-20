@@ -184,14 +184,12 @@ function closePopupOnOverlay(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
- // document.addEventListener('click', closePopupOnOverlay);
 }
 
 //Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupOnEsc);
- // document.removeEventListener('click', closePopupOnOverlay);
 }
 
 

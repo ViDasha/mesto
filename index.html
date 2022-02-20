@@ -33,6 +33,7 @@
       <p class="footer__copyright">© 2021 Mesto Russia</p>
     </footer>
     <div id="pp-edit" class="popup">
+      <div class="popup__overlay"></div>
       <div class="popup__container popup__container_type_form">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -46,6 +47,7 @@
       </div>
     </div>
     <div id="pp-add" class="popup">
+      <div class="popup__overlay"></div>
       <div class="popup__container popup__container_type_form">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -58,7 +60,8 @@
         </form>
       </div>
     </div>
-    <div id="pp-img" class="popup popup_darkened">
+    <div id="pp-img" class="popup">
+      <div class="popup__overlay popup__overlay_darkened"></div>
       <div class="popup__container">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <img src="#" alt="" class="popup__image">
