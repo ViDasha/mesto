@@ -148,12 +148,8 @@ function addCard(evt) {
   closePopupAdd();
 }
 
-loadInitialCards();
-editButton.addEventListener('click', openPopupEdit);
-closeButtonEditForm.addEventListener('click', closePopupEdit);
-popupEditForm.addEventListener('submit', rewriteProfile);
-
-document.addEventListener('keydown', function (evt) {
+//Закрыть попап по кнопке ESC
+function closePopupOnEsc (evt) {
   if ((evt.key === "Escape") || (evt.key === "Esc")) {
     const popupOpened = document.getElementsByClassName('popup_opened');
     switch (popupOpened[0].id) { 
@@ -162,7 +158,15 @@ document.addEventListener('keydown', function (evt) {
       case 'pp-img': closePopupImg();
     }
   }
-});
+}
+
+
+loadInitialCards();
+editButton.addEventListener('click', openPopupEdit);
+closeButtonEditForm.addEventListener('click', closePopupEdit);
+popupEditForm.addEventListener('submit', rewriteProfile);
+
+document.addEventListener('keydown', closePopupOnEsc);
 
 addButton.addEventListener('click', openPopupAdd);
 closeButtonAddForm.addEventListener('click', closePopupAdd);
