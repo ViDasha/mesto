@@ -171,13 +171,11 @@ function closePopupOnEsc(evt) {
 
 //Закрыть попап по клику на оверлей
 function closePopupOnOverlay(evt) {
-  const clickOnPopup = evt.target.closest('.popup__container');
-  const popupOpened = page.querySelector('.popup_opened');
- /* if (!clickOnPopup ) {
+  const targetOverlay = evt.target.classList.contains('popup__overlay');
+  if (targetOverlay) {
+    const popupOpened = page.querySelector('.popup_opened');
     popupOpened.classList.remove('popup_opened');
-  }*/
-  console.log(evt.target);
-  console.log(evt.currentTarget);
+  }
 }
 
 //Открыть попап
