@@ -42,19 +42,16 @@ const page = document.querySelector('.page');
 const popupEdit = document.getElementById('pp-edit');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const editButton = page.querySelector('.profile__edit-button');
-const closeButtonEditForm = popupEdit.querySelector('.popup__close');
 const popupEditName = document.getElementById('pp-edit-name');
 const popupEditJob = document.getElementById('pp-edit-job');
 
 const popupImg = document.getElementById('pp-img');
 const imagePopupImg = popupImg.querySelector('.popup__image');
 const namePopupImg = popupImg.querySelector('.popup__name');
-const closeButtonPopupImg = popupImg.querySelector('.popup__close');
 
 const popupAdd = document.getElementById('pp-add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const addButton = page.querySelector('.profile__add-button');
-const closeButtonAddForm = popupAdd.querySelector('.popup__close');
 const popupAddName = document.getElementById('pp-add-name');
 const popupAddSrc = document.getElementById('pp-add-src');
 
@@ -108,22 +105,12 @@ function openImg(evt) {
   openPopup(popupImg);
 }
 
-//Закрыть изображение
-function closePopupImg() {
-  closePopup(popupImg);
-}
-
 //Отобразить форму редактирования с заполненными полями
 function openPopupEdit() {
+  resetErrorList(popupEdit);
   popupEditName.value = profileName.textContent;
   popupEditJob.value = profileJob.textContent;
   openPopup(popupEdit);
-}
-
-//Закрыть форму редактирования
-function closePopupEdit() {
-  closePopup(popupEdit);
-  resetErrorList(popupEdit);
 }
 
 //Закрыть форму редактирования с перезаписью значений на главной
@@ -132,19 +119,14 @@ function rewriteProfile(evt) {
 
   profileName.textContent = popupEditName.value;
   profileJob.textContent = popupEditJob.value;
-  closePopupEdit();
+  closePopup(popupEdit);
 }
 
 //Отобразить форму добавления карточки
 function openPopupAdd() {
-  openPopup(popupAdd);
-}
-
-//Закрыть форму создания карточек
-function closePopupAdd() {
-  closePopup(popupAdd);
   popupAddForm.reset();
   resetErrorList(popupAdd);
+  openPopup(popupAdd);
 }
 
 //Закрыть форму создания карточки с добавлением карточки в начало
@@ -152,29 +134,13 @@ function addCard(evt) {
   evt.preventDefault();
 
   elements.prepend(createCard({ name: popupAddName.value, link: popupAddSrc.value }));
-  closePopupAdd();
+  closePopup(popupAdd);
 }
 
 //Закрыть попап по кнопке ESC
 function closePopupOnEsc(evt) {
   if ((evt.key === "Escape") || (evt.key === "Esc")) {
-    const popupOpened = page.querySelector('.popup_opened');
-    switch (popupOpened.id) {
-      case 'pp-add': closePopupAdd();
-      case 'pp-edit': closePopupEdit();
-      case 'pp-img': closePopupImg();
-    }
-  }
-}
-
-//Закрыть попап по клику на оверлей
-function closePopupOnOverlay(evt) {
-  const targetOverlay = evt.target.classList.contains('popup__overlay');
-  if (targetOverlay) {
-    const popupOpened = page.querySelector('.popup_opened');
-    if (popupOpened) {
-      popupOpened.classList.remove('popup_opened');
-    }
+    closePopup(page.querySelector('.popup_opened'));
   }
 }
 
@@ -182,26 +148,32 @@ function closePopupOnOverlay(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
-  popup.addEventListener('click', closePopupOnOverlay);
 }
 
 //Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupOnEsc);
-  popup.removeEventListener('click', closePopupOnOverlay);
 }
 
 
 loadInitialCards();
 editButton.addEventListener('click', openPopupEdit);
-closeButtonEditForm.addEventListener('click', closePopupEdit);
 popupEditForm.addEventListener('submit', rewriteProfile);
 
 addButton.addEventListener('click', openPopupAdd);
-closeButtonAddForm.addEventListener('click', closePopupAdd);
 popupAddForm.addEventListener('submit', addCard);
 
-closeButtonPopupImg.addEventListener('click', closePopupImg);
-
-
+const popups = document.querySelectorAll('.popup');
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    //Закрыть попап по крестику
+    if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup);
+    }
+    //Закрыть попап по оверлею
+    if ((evt.target.classList.contains('popup__overlay')) && (evt.currentTarget.classList.contains('popup_opened'))) {
+      closePopup(popup);
+    }
+  })
+})
