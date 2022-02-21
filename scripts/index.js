@@ -118,7 +118,6 @@ function openPopupEdit() {
   popupEditName.value = profileName.textContent;
   popupEditJob.value = profileJob.textContent;
   openPopup(popupEdit);
-  enableValidation(listValidationAttribute);
 }
 
 //Закрыть форму редактирования
@@ -139,7 +138,6 @@ function rewriteProfile(evt) {
 //Отобразить форму добавления карточки
 function openPopupAdd() {
   openPopup(popupAdd);
-  enableValidation(listValidationAttribute);
 }
 
 //Закрыть форму создания карточек
@@ -161,7 +159,7 @@ function addCard(evt) {
 function closePopupOnEsc(evt) {
   if ((evt.key === "Escape") || (evt.key === "Esc")) {
     const popupOpened = page.querySelector('.popup_opened');
-    switch (popupOpened.id) { 
+    switch (popupOpened.id) {
       case 'pp-add': closePopupAdd();
       case 'pp-edit': closePopupEdit();
       case 'pp-img': closePopupImg();
