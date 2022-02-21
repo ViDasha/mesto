@@ -172,7 +172,9 @@ function closePopupOnOverlay(evt) {
   const targetOverlay = evt.target.classList.contains('popup__overlay');
   if (targetOverlay) {
     const popupOpened = page.querySelector('.popup_opened');
-    popupOpened.classList.remove('popup_opened');
+    if (popupOpened) {
+      popupOpened.classList.remove('popup_opened');
+    }
   }
 }
 
@@ -180,12 +182,14 @@ function closePopupOnOverlay(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
+  popup.addEventListener('click', closePopupOnOverlay);
 }
 
 //Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupOnEsc);
+  popup.removeEventListener('click', closePopupOnOverlay);
 }
 
 
@@ -200,4 +204,4 @@ popupAddForm.addEventListener('submit', addCard);
 
 closeButtonPopupImg.addEventListener('click', closePopupImg);
 
-document.addEventListener('click', closePopupOnOverlay);
+
