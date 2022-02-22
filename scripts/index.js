@@ -123,18 +123,21 @@ function rewriteProfile(evt) {
 }
 
 //Отобразить форму добавления карточки
-function openPopupAdd() {
+function openPopupAdd(evt) {
   popupAddForm.reset();
   resetErrorList(popupAdd);
+  toggleButtonState(Array.from(popupAddForm.querySelectorAll(listValidationAttribute.inputSelector)), popupAddForm.querySelector(listValidationAttribute.submitButtonSelector), listValidationAttribute);
   openPopup(popupAdd);
 }
 
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-
   elements.prepend(createCard({ name: popupAddName.value, link: popupAddSrc.value }));
   closePopup(popupAdd);
+  /*const buttonElement = evt.target.querySelector(listValidationAttribute.submitButtonSelector);
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(listValidationAttribute.inactiveButtonClass); */
 }
 
 //Закрыть попап по кнопке ESC
