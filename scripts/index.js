@@ -135,9 +135,6 @@ function addCard(evt) {
   evt.preventDefault();
   elements.prepend(createCard({ name: popupAddName.value, link: popupAddSrc.value }));
   closePopup(popupAdd);
-  /*const buttonElement = evt.target.querySelector(listValidationAttribute.submitButtonSelector);
-  buttonElement.setAttribute('disabled', true);
-  buttonElement.classList.add(listValidationAttribute.inactiveButtonClass); */
 }
 
 //Закрыть попап по кнопке ESC
