@@ -1,3 +1,5 @@
+import { listValidationAttribute } from './initialData.js';
+
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, listAttribute) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -6,7 +8,7 @@ const showInputError = (formElement, inputElement, errorMessage, listAttribute) 
   errorElement.textContent = errorMessage;
   errorElement.classList.add(listAttribute.errorClass);
 };
-  
+
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement, listAttribute) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -31,18 +33,18 @@ const hasInvalidInput = (inputList) => {
 
     return !inputElement.validity.valid;
   })
-}; 
+};
 
 // Функция, которая переключает состояние кнопки
 const toggleButtonState = (inputList, buttonElement, listAttribute) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(listAttribute.inactiveButtonClass); 
+    buttonElement.classList.add(listAttribute.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(listAttribute.inactiveButtonClass);
   }
-}; 
+};
 
 //Функция, которая устанавливает слушатели для всех инпутов формы
 const setEventListeners = (formElement, listAttribute) => {
