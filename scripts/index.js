@@ -4,6 +4,8 @@ import { initialCards, listValidationAttribute, elementTemplate, elements, page,
 import { openPopup, closePopup } from './utils.js';
 
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
@@ -17,7 +19,13 @@ function loadInitialCards() {
 //Сбросить ошибки в spans в форме
 function resetErrorList(popup) {
   const popupItems = Array.from(popup.getElementsByClassName('popup__item'));
-  popupItems.forEach((item) => hideInputError(popup, item, listValidationAttribute));
+  popupItems.forEach((item) => {
+    const errorElement = popup.querySelector(`.${item.id}-error`);
+    item.classList.remove(listValidationAttribute.inputErrorClass);
+    //Удаляем span с ошибкой
+    errorElement.classList.remove(listValidationAttribute.errorClass);
+    errorElement.textContent = "";
+  });
 }
 
 //Отобразить форму редактирования с заполненными полями
@@ -41,15 +49,29 @@ function rewriteProfile(evt) {
 function openPopupAdd(evt) {
   popupAddForm.reset();
   resetErrorList(popupAdd);
-  toggleButtonState(Array.from(popupAddForm.querySelectorAll(listValidationAttribute.inputSelector)), popupAddForm.querySelector(listValidationAttribute.submitButtonSelector), listValidationAttribute);
+  const buttonElement = popupAddForm.querySelector(listValidationAttribute.submitButtonSelector);
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(listValidationAttribute.inactiveButtonClass);
   openPopup(popupAdd);
 }
 
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-  elements.prepend(createCard({ name: popupAddName.value, link: popupAddSrc.value }));
+  const card = new Card({ name: popupAddName.value, link: popupAddSrc.value }, '#element');
+  const newElement = card.generateCard();
+  elements.prepend(newElement);
   closePopup(popupAdd);
+}
+
+//Установить валидацию всех форм
+function loadValidationForms() {
+  const formList = Array.from(document.querySelectorAll(listValidationAttribute.formSelector));
+
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(listValidationAttribute, formElement);
+    formValidator.enableValidation();
+  });
 }
 
 loadInitialCards();
@@ -72,3 +94,5 @@ popups.forEach((popup) => {
     }
   })
 })
+
+loadValidationForms();
