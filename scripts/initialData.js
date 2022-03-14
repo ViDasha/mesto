@@ -58,5 +58,5 @@ const popupAddSrc = document.getElementById('pp-add-src');
 const profileName = page.querySelector('.profile__name');
 const profileJob = page.querySelector('.profile__job');
 
-export { initialCards, listValidationAttribute, elementTemplate, elements, page, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob, popupImg, imagePopupImg, namePopupImg,
+export { initialCards, listValidationAttribute, elementTemplate, elements, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob, popupImg, imagePopupImg, namePopupImg,
   popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob};

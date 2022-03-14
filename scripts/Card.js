@@ -1,4 +1,4 @@
-import { imagePopupImg, namePopupImg, popupImg} from "./initialData.js";
+import { imagePopupImg, namePopupImg, popupImg } from "./initialData.js";
 import { openPopup } from './utils.js';
 
 export class Card {

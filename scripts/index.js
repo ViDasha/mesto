@@ -1,4 +1,4 @@
-import { initialCards, listValidationAttribute, elementTemplate, elements, page, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob, popupImg, imagePopupImg, namePopupImg,
+import { initialCards, listValidationAttribute, elements, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob,
   popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob} from './initialData.js';
 
 import { openPopup, closePopup } from './utils.js';
@@ -6,13 +6,22 @@ import { openPopup, closePopup } from './utils.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
+//Генерация карточки
+function renderCard(data, toStart) {
+  const card = new Card(data, '#element');
+  const newElement = card.generateCard();
+  if (toStart) {
+    elements.append(newElement);
+  }
+  else {
+    elements.prepend(newElement);
+  }
+}
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
   initialCards.forEach(item => {
-    const card = new Card(item, '#element');
-    const newElement = card.generateCard();
-    elements.append(newElement);
+    renderCard(item, true);
   });
 }
 
@@ -58,9 +67,7 @@ function openPopupAdd(evt) {
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-  const card = new Card({ name: popupAddName.value, link: popupAddSrc.value }, '#element');
-  const newElement = card.generateCard();
-  elements.prepend(newElement);
+  renderCard({ name: popupAddName.value, link: popupAddSrc.value }, false);
   closePopup(popupAdd);
 }
 
