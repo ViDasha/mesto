@@ -6,6 +6,23 @@ import { openPopup, closePopup } from './utils.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
+
+const formValidators = {};
+
+//Установить валидацию всех форм
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(config, formElement);
+
+    const formName = formElement.getAttribute('id');
+    formValidators[formName] = formValidator;
+
+    formValidator.enableValidation();
+  });
+}
+
 function handleCardClick(data) {
   imagePopupImg.src = data.link;
   imagePopupImg.alt = data.name;
@@ -37,21 +54,9 @@ function loadInitialCards() {
   });
 }
 
-//Сбросить ошибки в spans в форме
-function resetErrorList(popup) {
-  const popupItems = Array.from(popup.getElementsByClassName('popup__item'));
-  popupItems.forEach((item) => {
-    const errorElement = popup.querySelector(`.${item.id}-error`);
-    item.classList.remove(listValidationAttribute.inputErrorClass);
-    //Удаляем span с ошибкой
-    errorElement.classList.remove(listValidationAttribute.errorClass);
-    errorElement.textContent = "";
-  });
-}
-
 //Отобразить форму редактирования с заполненными полями
 function openPopupEdit() {
-  resetErrorList(popupEdit);
+  formValidators[ popupEditForm.getAttribute('id') ].resetValidation();
   popupEditName.value = profileName.textContent;
   popupEditJob.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -69,10 +74,7 @@ function rewriteProfile(evt) {
 //Отобразить форму добавления карточки
 function openPopupAdd(evt) {
   popupAddForm.reset();
-  resetErrorList(popupAdd);
-  const buttonElement = popupAddForm.querySelector(listValidationAttribute.submitButtonSelector);
-  buttonElement.setAttribute('disabled', true);
-  buttonElement.classList.add(listValidationAttribute.inactiveButtonClass);
+  formValidators[ popupAddForm.getAttribute('id') ].resetValidation();
   openPopup(popupAdd);
 }
 
@@ -83,15 +85,6 @@ function addCard(evt) {
   closePopup(popupAdd);
 }
 
-//Установить валидацию всех форм
-function loadValidationForms() {
-  const formList = Array.from(document.querySelectorAll(listValidationAttribute.formSelector));
-
-  formList.forEach((formElement) => {
-    const formValidator = new FormValidator(listValidationAttribute, formElement);
-    formValidator.enableValidation();
-  });
-}
 
 loadInitialCards();
 editButton.addEventListener('click', openPopupEdit);
@@ -114,4 +107,4 @@ popups.forEach((popup) => {
   })
 })
 
-loadValidationForms();
+enableValidation(listValidationAttribute);

@@ -37,7 +37,7 @@
       <div class="popup__container popup__container_type_form">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form method="post" action="#" name="popup-form" class="popup__form" novalidate>
+        <form method="post" action="#" id="pp-edit-form" name="popup-form" class="popup__form" novalidate>
             <input id="pp-edit-name" type="text" name="name" class="popup__item" placeholder="Имя" minlength="2" maxlength="40" required>
             <span class="pp-edit-name-error popup__item-error"></span>
             <input id="pp-edit-job" type="text" name="job" class="popup__item" placeholder="О себе" minlength="2" maxlength="200" required>
@@ -51,7 +51,7 @@
       <div class="popup__container popup__container_type_form">
         <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form method="post" action="#" name="popup-form" class="popup__form" novalidate>
+        <form method="post" action="#" id="pp-add-form" name="popup-form" class="popup__form" novalidate>
             <input id="pp-add-name" type="text" name="name" class="popup__item" placeholder="Название" minlength="2" maxlength="30" required>
             <span class="pp-add-name-error popup__item-error"></span>
             <input id="pp-add-src" type="url" name="src" class="popup__item" placeholder="Ссылка на картинку" required>
