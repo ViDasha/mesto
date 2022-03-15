@@ -6,22 +6,18 @@ import { openPopup, closePopup } from './utils.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
-//Генерация карточки
-function renderCard(data, toStart) {
+//Создание карточки
+function createCard(data) {
   const card = new Card(data, '#element');
   const newElement = card.generateCard();
-  if (toStart) {
-    elements.append(newElement);
-  }
-  else {
-    elements.prepend(newElement);
-  }
+  return newElement;
 }
 
 //Загрузить 6 карточек формы
 function loadInitialCards() {
   initialCards.forEach(item => {
-    renderCard(item, true);
+    const newElement = createCard(item);
+    elements.append(newElement);
   });
 }
 
@@ -67,7 +63,8 @@ function openPopupAdd(evt) {
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-  renderCard({ name: popupAddName.value, link: popupAddSrc.value }, false);
+  const newElement = createCard({ name: popupAddName.value, link: popupAddSrc.value });
+  elements.prepend(newElement);
   closePopup(popupAdd);
 }
 
