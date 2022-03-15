@@ -23,6 +23,7 @@ function enableValidation(config) {
   });
 }
 
+//Ручка клика на карточку
 function handleCardClick(data) {
   imagePopupImg.src = data.link;
   imagePopupImg.alt = data.name;
@@ -37,7 +38,7 @@ function createCard(data) {
   return newElement;
 }
 
-//Генерация карточки
+//Визуализация карточки
 function renderCard(data, toStart) {
   const newElement = createCard(data);
   if (toStart) {
@@ -72,7 +73,7 @@ function rewriteProfile(evt) {
 }
 
 //Отобразить форму добавления карточки
-function openPopupAdd(evt) {
+function openPopupAdd() {
   popupAddForm.reset();
   formValidators[ popupAddForm.getAttribute('id') ].resetValidation();
   openPopup(popupAdd);
