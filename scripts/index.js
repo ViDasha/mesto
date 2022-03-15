@@ -13,11 +13,19 @@ function createCard(data) {
   return newElement;
 }
 
+//Генерация карточки
+function renderCard(data, toStart) {
+  const newElement = createCard(data);
+  if (toStart) {
+    elements.append(newElement);
+  } else {
+    elements.prepend(newElement);
+  }
+}
 //Загрузить 6 карточек формы
 function loadInitialCards() {
   initialCards.forEach(item => {
-    const newElement = createCard(item);
-    elements.append(newElement);
+    renderCard(item, true);
   });
 }
 
@@ -63,8 +71,7 @@ function openPopupAdd(evt) {
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-  const newElement = createCard({ name: popupAddName.value, link: popupAddSrc.value });
-  elements.prepend(newElement);
+  renderCard({ name: popupAddName.value, link: popupAddSrc.value }, false);
   closePopup(popupAdd);
 }
 
