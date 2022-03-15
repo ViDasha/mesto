@@ -1,14 +1,21 @@
 import { initialCards, listValidationAttribute, elements, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob,
-  popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob} from './initialData.js';
+  popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob, imagePopupImg, namePopupImg, popupImg } from './initialData.js';
 
 import { openPopup, closePopup } from './utils.js';
 
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
+function handleCardClick(data) {
+  imagePopupImg.src = data.link;
+  imagePopupImg.alt = data.name;
+  namePopupImg.textContent = data.name;
+  openPopup(popupImg);
+}
+
 //Создание карточки
 function createCard(data) {
-  const card = new Card(data, '#element');
+  const card = new Card(data, '#element', handleCardClick);
   const newElement = card.generateCard();
   return newElement;
 }
@@ -22,6 +29,7 @@ function renderCard(data, toStart) {
     elements.prepend(newElement);
   }
 }
+
 //Загрузить 6 карточек формы
 function loadInitialCards() {
   initialCards.forEach(item => {

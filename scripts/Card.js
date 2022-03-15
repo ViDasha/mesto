@@ -1,10 +1,8 @@
-import { imagePopupImg, namePopupImg, popupImg } from "./initialData.js";
-import { openPopup } from './utils.js';
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -15,14 +13,6 @@ export class Card {
     .cloneNode(true);
 
     return cardElement;
-  }
-
-  _handleOpenImg(evt) {
-    const elementImg = evt.target;
-    imagePopupImg.src = elementImg.src;
-    imagePopupImg.alt = elementImg.alt;
-    namePopupImg.textContent = elementImg.closest('.element').querySelector('.element__name').textContent;
-    openPopup(popupImg);
   }
 
   _handleDoLike(evt) {
@@ -37,7 +27,7 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', (evt) => {
-      this._handleOpenImg(evt);
+      this._handleCardClick(this._data);
     });
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
       this._handleDoLike(evt);
