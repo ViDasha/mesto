@@ -1,3 +1,5 @@
+import { page } from './initialData.js';
+
 //Закрыть попап по кнопке ESC
 function closePopupOnEsc(evt) {
   if ((evt.key === "Escape") || (evt.key === "Esc")) {

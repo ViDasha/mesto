@@ -59,4 +59,4 @@ const profileName = page.querySelector('.profile__name');
 const profileJob = page.querySelector('.profile__job');
 
 export { initialCards, listValidationAttribute, elementTemplate, elements, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob, popupImg, imagePopupImg, namePopupImg,
-  popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob};
+  popupAdd, popupAddForm, addButton, popupAddName, popupAddSrc, profileName, profileJob, page};
