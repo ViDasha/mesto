@@ -6,6 +6,7 @@ import { openPopup, closePopup } from './utils.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import Section from './Section.js';
+import PopupWithForm from './PopupWithForm.js';
 
 const formValidators = {};
 
@@ -106,12 +107,19 @@ function addCard(evt) {
 
 
 //loadInitialCards();
-editButton.addEventListener('click', openPopupEdit);
-popupEditForm.addEventListener('submit', rewriteProfile);
+//editButton.addEventListener('click', openPopupEdit);
+//popupEditForm.addEventListener('submit', rewriteProfile);
 
-addButton.addEventListener('click', openPopupAdd);
-popupAddForm.addEventListener('submit', addCard);
+//addButton.addEventListener('click', openPopupAdd);
+//popupAddForm.addEventListener('submit', addCard);
 
+const popupEditProfile = new PopupWithForm( '.popup__form', rewriteProfile, formValidators[ popupEditForm.getAttribute('id') ].resetValidation());
+popupEditProfile.setEventListeners();
+
+const popupAddCard = new PopupWithForm('.popup__form', addCard, formValidators[ popupAddForm.getAttribute('id') ].resetValidation());
+popupAddCard.setEventListeners();
+
+/*
 const popups = document.querySelectorAll('.popup');
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
@@ -125,5 +133,5 @@ popups.forEach((popup) => {
     }
   })
 })
-
+*/
 enableValidation(listValidationAttribute);
