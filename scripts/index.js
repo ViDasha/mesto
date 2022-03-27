@@ -5,7 +5,7 @@ import { openPopup, closePopup } from './utils.js';
 
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-
+import Section from './Section.js';
 
 const formValidators = {};
 
@@ -38,7 +38,7 @@ function createCard(data) {
   return newElement;
 }
 
-//Визуализация карточки
+/*//Визуализация карточки
 function renderCard(data, toStart) {
   const newElement = createCard(data);
   if (toStart) {
@@ -53,7 +53,17 @@ function loadInitialCards() {
   initialCards.forEach(item => {
     renderCard(item, true);
   });
-}
+}*/
+
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    cardList.addItem(cardElement, true);
+  }
+}, '.elements');
+
+cardList.renderItems();
 
 //Отобразить форму редактирования с заполненными полями
 function openPopupEdit() {
@@ -82,12 +92,20 @@ function openPopupAdd() {
 //Закрыть форму создания карточки с добавлением карточки в начало
 function addCard(evt) {
   evt.preventDefault();
-  renderCard({ name: popupAddName.value, link: popupAddSrc.value }, false);
+  const addCard = new Section({
+    data: [{ name: popupAddName.value, link: popupAddSrc.value }],
+    renderer: (item) => {
+      const cardElement = createCard(item);
+      cardList.addItem(cardElement, false);
+    }
+  }, '.element');
+  addCard.renderItems();
+  //renderCard({ name: popupAddName.value, link: popupAddSrc.value }, false);
   closePopup(popupAdd);
 }
 
 
-loadInitialCards();
+//loadInitialCards();
 editButton.addEventListener('click', openPopupEdit);
 popupEditForm.addEventListener('submit', rewriteProfile);
 
