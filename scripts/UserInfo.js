@@ -1,15 +1,17 @@
 export class UserInfo {
-  constructor( { name, info }, rewrite) {
-    this._name = name;
-    this._info = info;
-    this._rewrite = rewrite;
+  constructor( { nameSelector, jobSelector }) {
+    this._name = document.querySelector(nameSelector);
+    this._job = document.querySelector(jobSelector);
   }
 
+  //Возвращает объект с данными пользователя
   getUserInfo() {
-    return { name: this._name, info: this._info };
+    return { name: this._name.textContent, job: this._job.textContent };
   }
 
-  setUserInfo() {
-    this._rewrite({ name: this._name, info: this._info });
+  //Принимает данные пользователя и добавляет их на страницу
+  setUserInfo(info) {
+    this._name.textContent = info.name;
+    this._job.textContent = info.job;
   }
 }
