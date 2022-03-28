@@ -26,7 +26,6 @@ function enableValidation(config) {
   });
 }
 
-
 //Ручка клика на карточку
 function handleCardClick(data) {
   const popupWithImage = new PopupWithImage(data, 'pp-img');
@@ -50,14 +49,6 @@ const cardList = new Section({
 }, '.elements');
 
 cardList.renderItems();
-
-//Отобразить форму редактирования с заполненными полями
-function openPopupEdit() {
-  formValidators[ popupEditForm.getAttribute('id') ].resetValidation();
-  popupEditName.value = profileName.textContent;
-  popupEditJob.value = profileJob.textContent;
-  openPopup(popupEdit);
-}
 
 editButton.addEventListener('click', () => {
   formValidators[ popupEditForm.getAttribute('id') ].resetValidation();
