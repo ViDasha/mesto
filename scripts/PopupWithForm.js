@@ -27,6 +27,6 @@ export default class PopupWithForm extends Popup {
   close() {
     //сбросить форму
     super.close();
-    this._popup.reset();
+    this._popup.querySelector('.popup__form').reset();
   }
 }
