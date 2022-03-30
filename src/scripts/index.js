@@ -27,9 +27,7 @@ function enableValidation(config) {
 
 //Ручка клика на карточку
 function handleCardClick(data) {
-  const popupWithImage = new PopupWithImage(data, 'pp-img');
-  popupWithImage.setEventListeners();
-  popupWithImage.open();
+  popupWithImage.open(data);
 }
 
 //Создание карточки
@@ -40,14 +38,15 @@ function createCard(data) {
 }
 
 //Ручка генерации карточки
-function handleRendererCard(item, toStart) {
-  const cardElement = createCard(item);
-  cardList.addItem(cardElement, toStart);
+function handleRendererCard(inputValues) {
+  const cardElement = createCard(inputValues);
+  cardList.addItem(cardElement, true);
 }
 
 //Ручка добавления новой карточки
 function handleSubmitAddCard(inputValues) {
-  handleRendererCard(inputValues, false);
+  const cardElement = createCard(inputValues);
+  cardList.addItem(cardElement, false);
   popupAddCard.close();
 }
 
@@ -76,11 +75,10 @@ function handleSubmitEditProfile(inputValues) {
 
 //Генерация секции с карточками
 const cardList = new Section({
-  data: initialCards,
   renderer: handleRendererCard
 }, '.elements');
 
-cardList.renderItems();
+cardList.renderItems(initialCards);
 
 //Класс с информацией о пользователе
 const userInfo = new UserInfo('.profile__name', '.profile__job');
@@ -98,6 +96,10 @@ popupAddCard.setEventListeners();
 
 //Обработчик клика на кнопку "Добавить"
 addButton.addEventListener('click', handleOpenAddCard);
+
+//Класс попапа для открытия изображения
+const popupWithImage = new PopupWithImage('pp-img');
+popupWithImage.setEventListeners();
 
 //Запуск валидации всех форм
 enableValidation(listValidationAttribute);
