@@ -1,13 +1,13 @@
-import '../pages/index.css';
+import './index.css';
 
 import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditJob, popupAddForm, addButton } from './initialData.js';
 
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import { UserInfo } from './UserInfo.js';
-import PopupWithImage from './PopupWithImage.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const formValidators = {};
 
