@@ -68,8 +68,14 @@ function handleOpenAddCard() {
 
 //Ручка сохранения изменений профиля
 function handleSubmitEditProfile(inputValues) {
-  userInfo.setUserInfo(inputValues);
-  popupEditProfile.close();
+  api.patchUserInfo(inputValues)
+    .then((result) => {
+      userInfo.setUserInfo({ name: result.name, about: result.about });
+      popupEditProfile.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 }
 
 

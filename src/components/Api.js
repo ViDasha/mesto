@@ -1,13 +1,14 @@
 export class Api {
   constructor(options) {
-    this.baseUrl = options.baseUrl;
-    this.authorization = options.headers.authorization;
+    this._baseUrl = options.baseUrl;
+    this._authorization = options.headers.authorization;
+    this._contentType = options.headers["Content-Type"];
   }
 
   getInitialCards() {
-    return fetch(this.baseUrl + '/cards', {
+    return fetch(this._baseUrl + '/cards', {
       headers: {
-        authorization: this.authorization
+        authorization: this._authorization
       } })
       .then(res => {
         if (res.ok) {
@@ -20,10 +21,32 @@ export class Api {
   }
 
   getUserProfile() {
-    return fetch(this.baseUrl + '/users/me', {
+    return fetch(this._baseUrl + '/users/me', {
       headers: {
-        authorization: this.authorization
+        authorization: this._authorization
       }
+    })
+    .then (res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  patchUserInfo(info) {
+    return fetch(this._baseUrl + '/users/me', {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType
+      },
+      body: JSON.stringify({
+        name: info.name,
+        about: info.about
+      })
+
     })
     .then (res => {
       if (res.ok) {
