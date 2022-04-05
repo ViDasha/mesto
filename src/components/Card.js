@@ -45,6 +45,7 @@ export class Card {
     this._element.querySelector('.element__image').src = this._data.link;
     this._element.querySelector('.element__image').alt = this._data.name;
     this._element.querySelector('.element__name').textContent = this._data.name;
+    this._element.querySelector('.element__count-like').textContent = this._data.likes.length;
 
     return this._element;
   }
