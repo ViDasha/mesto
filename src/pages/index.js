@@ -46,9 +46,15 @@ function handleRendererCard(inputValues) {
 
 //Ручка добавления новой карточки
 function handleSubmitAddCard(inputValues) {
-  const cardElement = createCard(inputValues);
-  cardList.addItem(cardElement, false);
-  popupAddCard.close();
+  api.postNewCard(inputValues)
+  .then((result) => {
+    const cardElement = createCard({ name: result.name, link: result.link });
+    cardList.addItem(cardElement, false);
+    popupAddCard.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 //Ручка открытия попапа для редактирования профиля
