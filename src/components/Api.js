@@ -1,11 +1,14 @@
 export class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
-    this.headers = options.headers;
+    this.authorization = options.headers.authorization;
   }
 
   getInitialCards() {
-    return fetch(this.baseUrl + '/cards', { headers: this.headers })
+    return fetch(this.baseUrl + '/cards', {
+      headers: {
+        authorization: this.authorization
+      } })
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -16,5 +19,18 @@ export class Api {
       });
   }
 
-  // другие методы работы с API
+  getUserProfile() {
+    return fetch(this.baseUrl + '/users/me', {
+      headers: {
+        authorization: this.authorization
+      }
+    })
+    .then (res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 }

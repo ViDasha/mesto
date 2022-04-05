@@ -40,12 +40,12 @@ const popupEdit = document.getElementById('pp-edit');
 const popupEditForm = popupEdit.querySelector('.popup__form');
 const editButton = page.querySelector('.profile__edit-button');
 const popupEditName = document.getElementById('pp-edit-name');
-const popupEditJob = document.getElementById('pp-edit-job');
+const popupEditAbout = document.getElementById('pp-edit-about');
 
 const popupAdd = document.getElementById('pp-add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const addButton = page.querySelector('.profile__add-button');
 
 
-export { initialCards, listValidationAttribute, popupEdit, popupEditForm, editButton, popupEditName, popupEditJob,
+export { initialCards, listValidationAttribute, popupEdit, popupEditForm, editButton, popupEditName, popupEditAbout,
   popupAdd, popupAddForm, addButton, page};

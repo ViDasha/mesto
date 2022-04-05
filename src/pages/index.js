@@ -1,6 +1,6 @@
 import './index.css';
 
-import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditJob, popupAddForm, addButton } from '../components/initialData.js';
+import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton } from '../components/initialData.js';
 
 import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
@@ -54,9 +54,9 @@ function handleSubmitAddCard(inputValues) {
 //Ручка открытия попапа для редактирования профиля
 function handleOpenEditProfile() {
   formValidators[ popupEditForm.getAttribute('id') ].resetValidation();
-  const { name, job } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   popupEditName.value = name;
-  popupEditJob.value = job;
+  popupEditAbout.value = about;
   popupEditProfile.open();
 }
 
@@ -82,6 +82,19 @@ const api = new Api({
   }
 });
 
+//Класс с информацией о пользователе
+const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar');
+
+//Получение данных пользователя и отображение на странице
+api.getUserProfile()
+  .then((result) => {
+    userInfo.setUserInfo({ name: result.name, about: result.about });
+    userInfo.setUserAvatar(result.avatar);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
 //Генерация секции с карточками
 const cardList = new Section({
   renderer: handleRendererCard
@@ -96,9 +109,6 @@ api.getInitialCards()
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
-
-//Класс с информацией о пользователе
-const userInfo = new UserInfo('.profile__name', '.profile__job');
 
 //Класс попапа для редактирования профиля
 const popupEditProfile = new PopupWithForm('pp-edit', handleSubmitEditProfile);
