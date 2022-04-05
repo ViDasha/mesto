@@ -2,6 +2,7 @@ import './index.css';
 
 import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditJob, popupAddForm, addButton } from '../components/initialData.js';
 
+import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -72,13 +73,29 @@ function handleSubmitEditProfile(inputValues) {
 }
 
 
+//Создание класса Api
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  headers: {
+    authorization: 'bf5f1893-17e0-49e0-bcb2-32090faea63d',
+    'Content-Type': 'application/json'
+  }
+});
 
 //Генерация секции с карточками
 const cardList = new Section({
   renderer: handleRendererCard
 }, '.elements');
 
-cardList.renderItems(initialCards);
+//Загрузка карточек с сервера и отрисовка
+api.getInitialCards()
+  .then((result) => {
+    // обрабатываем результат
+    cardList.renderItems(result);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 
 //Класс с информацией о пользователе
 const userInfo = new UserInfo('.profile__name', '.profile__job');
