@@ -1,9 +1,12 @@
+import { data } from "autoprefixer";
+
 export class Card {
-  constructor(data, cardSelector, handleCardClick, handleCardDelete) {
+  constructor(data, cardSelector, userId, handleCardClick, handleCardDelete) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleGetCardDelete = handleCardDelete;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -50,8 +53,13 @@ export class Card {
     this._element.querySelector('.element__name').textContent = this._data.name;
     this._element.querySelector('.element__count-like').textContent = this._data.likes.length;
 
+    if (this._data.owner._id != this._userId) {
+      this._hideBasket();
+    }
     return this._element;
   }
 
-
+  _hideBasket() {
+    this._element.querySelector('.element__basket').classList.add('.element__basket_hide');
+  }
 }

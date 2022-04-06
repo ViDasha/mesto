@@ -23,6 +23,7 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__basket/element__basket.css);
+@import url(../blocks/element/__basket/_hide/element__basket_hide.css);
 @import url(../blocks/element/__panel/element__panel.css);
 @import url(../blocks/element/__name/element__name.css);
 @import url(../blocks/element/__area-like/element__area-like.css);

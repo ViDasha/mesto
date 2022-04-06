@@ -33,8 +33,8 @@ function handleCardClick(data) {
 }
 
 //Ручка удаления карточки
-function handleCardDelete(id) {
-
+function handleCardDelete(cardId) {
+  api.deleteCard(cardId);
 }
 
 //Ручка открытия попапа удаления карточки
@@ -44,8 +44,9 @@ function handleOpenFormDelete(data) {
 
 //Создание карточки
 function createCard(data) {
-  const card = new Card(data, '#element', handleCardClick, handleOpenFormDelete);
+  const card = new Card(data, '#element', userInfo.getUserInfo()._id, handleCardClick, handleOpenFormDelete);
   const newElement = card.generateCard();
+
   return newElement;
 }
 
@@ -111,7 +112,7 @@ const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__av
 //Получение данных пользователя и отображение на странице
 api.getUserProfile()
   .then((result) => {
-    userInfo.setUserInfo({ name: result.name, about: result.about });
+    userInfo.setUserInfo({ name: result.name, about: result.about, _id: result._id });
     userInfo.setUserAvatar(result.avatar);
   })
   .catch((err) => {
