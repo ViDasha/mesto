@@ -77,6 +77,18 @@
         </form>
       </div>
     </div>
+    <div id="pp-avatar" class="popup">
+      <div class="popup__overlay"></div>
+      <div class="popup__container popup__container_type_form">
+        <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form method="post" action="#" id="pp-avatar-form" name="popup-form" class="popup__form" novalidate>
+            <input id="pp-avatar-src" type="url" name="link" class="popup__item" placeholder="Ссылка на картинку" required>
+            <span class="pp-avatar-src-error popup__item-error"></span>
+            <button id="pp-avatar-save" type="submit" aria-label="Сохранить" name="save" class="popup__button-save">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <template id="element">
       <article class="element">
         <img class="element__image">
