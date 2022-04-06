@@ -34,7 +34,7 @@ function handleCardClick(data) {
 
 //Ручка удаления карточки
 function handleCardDelete(cardId) {
-  api.deleteCard(cardId);
+  //api.deleteCard(cardId);
 }
 
 //Ручка открытия попапа удаления карточки
@@ -60,7 +60,7 @@ function handleRendererCard(inputValues) {
 function handleSubmitAddCard(inputValues) {
   api.postNewCard(inputValues)
   .then((result) => {
-    const cardElement = createCard({ name: result.name, link: result.link, id: result._id });
+    const cardElement = createCard(result);
     cardList.addItem(cardElement, false);
     popupAddCard.close();
   })

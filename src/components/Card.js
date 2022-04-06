@@ -1,11 +1,9 @@
-import { data } from "autoprefixer";
-
 export class Card {
-  constructor(data, cardSelector, userId, handleCardClick, handleCardDelete) {
+  constructor(data, cardSelector, userId, handleCardClick, handleOpenFormDelete) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleGetCardDelete = handleCardDelete;
+    this._handleOpenFormDelete = handleOpenFormDelete;
     this._userId = userId;
   }
 
@@ -39,8 +37,8 @@ export class Card {
       this._handleDoLike(evt);
     });
     this._element.querySelector('.element__basket').addEventListener('click', (evt) => {
-      this._handleGetCardDelete(this._data);
-      this._handleDeleteCard(evt);
+      this._handleOpenFormDelete(this._data);
+      //this._handleDeleteCard(evt);
     });
   }
 
@@ -60,6 +58,6 @@ export class Card {
   }
 
   _hideBasket() {
-    this._element.querySelector('.element__basket').classList.add('.element__basket_hide');
+    this._element.querySelector('.element__basket').classList.add('element__basket_hide');
   }
 }

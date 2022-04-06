@@ -6,10 +6,10 @@
   margin-right: 18px;
 }
 
-.profile__avatar:hover {
+ .profile__avatar:hover {
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.8);
-  /*background-image: url(../../../images/edit_avatar.svg);*/
+  background: #C4C4C4;
+  background-image: url(../../../images/edit_avatar.svg);
   opacity: 0.8;
   transition: opacity 1s;
 }
