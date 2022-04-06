@@ -1,8 +1,9 @@
 export class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleCardDelete) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleGetCardDelete = handleCardDelete;
   }
 
   _getTemplate() {
@@ -20,10 +21,12 @@ export class Card {
     elementLike.classList.add('element__like_active');
   }
 
+
   _handleDeleteCard(evt) {
     const elementCard = evt.target.closest('.element');
     elementCard.remove();
   }
+
 
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', (evt) => {
@@ -33,9 +36,9 @@ export class Card {
       this._handleDoLike(evt);
     });
     this._element.querySelector('.element__basket').addEventListener('click', (evt) => {
+      this._handleGetCardDelete(this._data);
       this._handleDeleteCard(evt);
     });
-
   }
 
   generateCard() {

@@ -9,6 +9,7 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 const formValidators = {};
 
@@ -31,9 +32,19 @@ function handleCardClick(data) {
   popupWithImage.open(data);
 }
 
+//Ручка удаления карточки
+function handleCardDelete(id) {
+
+}
+
+//Ручка открытия попапа удаления карточки
+function handleOpenFormDelete(data) {
+  popupCardDelete.open(data);
+}
+
 //Создание карточки
 function createCard(data) {
-  const card = new Card(data, '#element', handleCardClick);
+  const card = new Card(data, '#element', handleCardClick, handleOpenFormDelete);
   const newElement = card.generateCard();
   return newElement;
 }
@@ -48,7 +59,7 @@ function handleRendererCard(inputValues) {
 function handleSubmitAddCard(inputValues) {
   api.postNewCard(inputValues)
   .then((result) => {
-    const cardElement = createCard({ name: result.name, link: result.link });
+    const cardElement = createCard({ name: result.name, link: result.link, id: result._id });
     cardList.addItem(cardElement, false);
     popupAddCard.close();
   })
@@ -139,6 +150,10 @@ addButton.addEventListener('click', handleOpenAddCard);
 //Класс попапа для открытия изображения
 const popupWithImage = new PopupWithImage('pp-img');
 popupWithImage.setEventListeners();
+
+//Класс попапа для удаления карточки
+const popupCardDelete = new PopupWithConfirmation('pp-delete', handleCardDelete);
+popupCardDelete.setEventListeners();
 
 //Запуск валидации всех форм
 enableValidation(listValidationAttribute);

@@ -67,6 +67,16 @@
         <h2 class="popup__name">Изображение</h2>
       </div>
     </div>
+    <div id="pp-delete" class="popup">
+      <div class="popup__overlay"></div>
+      <div class="popup__container popup__container_type_form">
+        <button type="button" aria-label="Закрыть" name="close" class="popup__close"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form method="post" action="#" id="pp-delete-form" name="popup-form" class="popup__form" novalidate>
+          <button id="pp-delete-save" type="submit" aria-label="Сохранить" name="save" class="popup__button-save">Да</button>
+        </form>
+      </div>
+    </div>
     <template id="element">
       <article class="element">
         <img class="element__image">

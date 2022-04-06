@@ -47,5 +47,6 @@ const popupAddForm = popupAdd.querySelector('.popup__form');
 const addButton = page.querySelector('.profile__add-button');
 
 
+
 export { initialCards, listValidationAttribute, popupEdit, popupEditForm, editButton, popupEditName, popupEditAbout,
   popupAdd, popupAddForm, addButton, page};
