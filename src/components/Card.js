@@ -22,12 +22,9 @@ export class Card {
     elementLike.classList.add('element__like_active');
   }
 
-
-  _handleDeleteCard(evt) {
-    const elementCard = evt.target.closest('.element');
-    elementCard.remove();
+  handleDeleteCard() {
+    this._element.remove();
   }
-
 
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', (evt) => {
@@ -38,7 +35,6 @@ export class Card {
     });
     this._element.querySelector('.element__basket').addEventListener('click', (evt) => {
       this._handleOpenFormDelete(this._data);
-      //this._handleDeleteCard(evt);
     });
   }
 

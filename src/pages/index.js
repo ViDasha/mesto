@@ -34,12 +34,20 @@ function handleCardClick(data) {
 
 //Ручка удаления карточки
 function handleCardDelete(cardId) {
-  //api.deleteCard(cardId);
+  api.deleteCard(cardId)
+  .then(() => {
+    this.handleDeleteCard();
+    popupCardDelete.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 }
 
 //Ручка открытия попапа удаления карточки
 function handleOpenFormDelete(data) {
   popupCardDelete.open(data);
+  popupCardDelete.changeSubmitFunction(handleCardDelete.bind(this));
 }
 
 //Создание карточки
@@ -153,7 +161,7 @@ const popupWithImage = new PopupWithImage('pp-img');
 popupWithImage.setEventListeners();
 
 //Класс попапа для удаления карточки
-const popupCardDelete = new PopupWithConfirmation('pp-delete', handleCardDelete);
+const popupCardDelete = new PopupWithConfirmation('pp-delete');
 popupCardDelete.setEventListeners();
 
 //Запуск валидации всех форм
