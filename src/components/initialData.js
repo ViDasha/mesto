@@ -46,7 +46,9 @@ const popupAdd = document.getElementById('pp-add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const addButton = page.querySelector('.profile__add-button');
 
+const profileAvatar = page.querySelector('.profile__avatar');
+const popupEditAvatarForm = document.getElementById('pp-avatar').querySelector('.popup__form');
 
 
 export { initialCards, listValidationAttribute, popupEdit, popupEditForm, editButton, popupEditName, popupEditAbout,
-  popupAdd, popupAddForm, addButton, page};
+  popupAdd, popupAddForm, addButton, profileAvatar, popupEditAvatarForm, page};

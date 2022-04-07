@@ -1,6 +1,6 @@
 import './index.css';
 
-import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton } from '../components/initialData.js';
+import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton, profileAvatar, popupEditAvatarForm } from '../components/initialData.js';
 
 import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
@@ -92,6 +92,24 @@ function handleOpenAddCard() {
   popupAddCard.open();
 }
 
+//Ручка открытия попапа для изменения аватара
+function handleOpenEditAvatar() {
+  formValidators[ popupEditAvatarForm.getAttribute('id') ].resetValidation();
+  popupEditAvatar.open();
+}
+
+//Ручка сохранения изменения аватара
+function handleSubmitEditAvatar(inputValues) {
+  api.patchUserAvatar(inputValues.link)
+  .then((result) => {
+    userInfo.setUserAvatar(result.avatar);
+    popupEditAvatar.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+}
+
 //Ручка сохранения изменений профиля
 function handleSubmitEditProfile(inputValues) {
   api.patchUserInfo(inputValues)
@@ -115,7 +133,7 @@ const api = new Api({
 });
 
 //Класс с информацией о пользователе
-const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar');
+const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar-img');
 
 //Получение данных пользователя и отображение на странице
 api.getUserProfile()
@@ -148,6 +166,13 @@ popupEditProfile.setEventListeners();
 
 //Обработчик клика на кнопку "Редактировать"
 editButton.addEventListener('click', handleOpenEditProfile);
+
+//Класс попапа для редактирования аватара
+const popupEditAvatar = new PopupWithForm('pp-avatar', handleSubmitEditAvatar);
+popupEditAvatar.setEventListeners();
+
+//Обработчик клика на аватар
+profileAvatar.addEventListener('click', handleOpenEditAvatar);
 
 //Класс попапа для добавления карточки
 const popupAddCard = new PopupWithForm('pp-add', handleSubmitAddCard);

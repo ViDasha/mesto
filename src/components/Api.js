@@ -92,4 +92,24 @@ export class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  patchUserAvatar(url) {
+    return fetch(this._baseUrl + '/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType
+      },
+      body: JSON.stringify({
+        avatar: url
+      })
+    })
+    .then (res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 }
