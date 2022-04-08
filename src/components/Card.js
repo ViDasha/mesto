@@ -1,10 +1,12 @@
 export class Card {
-  constructor(data, cardSelector, userId, handleCardClick, handleOpenFormDelete) {
+  constructor(data, cardSelector, userId, handleCardClick, handleOpenFormDelete,  handleDoLike, handleDeleteLike) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleOpenFormDelete = handleOpenFormDelete;
     this._userId = userId;
+    this._handleDoLike = handleDoLike;
+    this._handleDeleteLike = handleDeleteLike;
   }
 
   _getTemplate() {
@@ -16,28 +18,47 @@ export class Card {
 
     return cardElement;
   }
-//сделать два метода в индекс для api добавления и удаления, 
-//сделать здесь общий метод, который пройдется по массиву лайков и найдет лайк от пользователя
-  _handleDoLike(evt) {
-    const elementLike = evt.target;
-    elementLike.classList.add('element__like_active');
+
+  _DoLike() {
+    this._element.querySelector('.element__like').classList.add('element__like_active');
   }
 
-  _handleHideLike(evt) {
-    const elementLike = evt.target;
-    elementLike.classList.remove('element__like_active');
+  _HideLike() {
+    this._element.querySelector('.element__like').classList.remove('element__like_active');
   }
 
-  handleDeleteCard() {
+  _handleDeleteCard() {
     this._element.remove();
+  }
+
+  _isLiked() {
+    return this._data.likes.find((item) => item._id == this._userId);
+  }
+
+  _changeLike() {
+    if (this._isLiked()) {
+      this._HideLike();
+      this._handleDeleteLike(this._data._id);
+    } else {
+      this._DoLike();
+      this._handleDoLike(this._data._id);
+    }
+  }
+
+  _countLikes() {
+    this._element.querySelector('.element__count-like').textContent = this._data.likes.length;
+  }
+
+  _hideBasket() {
+    this._element.querySelector('.element__basket').classList.add('element__basket_hide');
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', (evt) => {
       this._handleCardClick(this._data);
     });
-    this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-      this._handleDoLike(evt);
+    this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._changeLike();
       //Здесь общий метод по поиску лайка, он вызовет внешние ручки
     });
     this._element.querySelector('.element__basket').addEventListener('click', (evt) => {
@@ -53,7 +74,11 @@ export class Card {
     this._element.querySelector('.element__image').alt = this._data.name;
     this._element.querySelector('.element__name').textContent = this._data.name;
     //здесь тоже общий метод по поиску лайка
-    this._element.querySelector('.element__count-like').textContent = this._data.likes.length;
+    if (this._isLiked()) {
+      this._DoLike();
+    }
+
+    this._countLikes();
 
     if (this._data.owner._id != this._userId) {
       this._hideBasket();
@@ -61,7 +86,8 @@ export class Card {
     return this._element;
   }
 
-  _hideBasket() {
-    this._element.querySelector('.element__basket').classList.add('element__basket_hide');
+  updateCard(card) {
+    this._data = card;
+    this._countLikes();
   }
 }

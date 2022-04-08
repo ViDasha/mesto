@@ -50,9 +50,32 @@ function handleOpenFormDelete(data) {
   popupCardDelete.changeSubmitFunction(handleCardDelete.bind(this));
 }
 
+//Ручка для отправки запроса на постановку лайка
+function handleDoLike(cardId) {
+  api.putCardLike(cardId)
+  .then((result) => {
+    this.updateCard(result);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+}
+
+//Ручка для отправки запроса на удаление лайка
+function handleDeleteLike(cardId) {
+  api.deleteCardLike(cardId)
+  .then((result) => {
+    this.updateCard(result);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+}
+
 //Создание карточки
 function createCard(data) {
-  const card = new Card(data, '#element', userInfo.getUserInfo()._id, handleCardClick, handleOpenFormDelete);
+  const card = new Card(data, '#element', userInfo.getUserInfo()._id, handleCardClick, 
+                          handleOpenFormDelete, handleDoLike, handleDeleteLike);
   const newElement = card.generateCard();
 
   return newElement;
