@@ -5,19 +5,21 @@ export class Api {
     this._contentType = options.headers["Content-Type"];
   }
 
+  _renderResult(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       headers: {
         authorization: this._authorization
       } })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._renderResult);
   }
 
   getUserProfile() {
@@ -26,13 +28,7 @@ export class Api {
         authorization: this._authorization
       }
     })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._renderResult);
   }
 
   patchUserInfo(info) {
@@ -47,13 +43,7 @@ export class Api {
         about: info.about
       })
     })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then (this._renderResult);
   }
 
   postNewCard(info) {
@@ -68,13 +58,7 @@ export class Api {
         link: info.link
       })
     })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._renderResult);
   }
 
   deleteCard(id) {
@@ -84,13 +68,7 @@ export class Api {
         authorization: this._authorization
       }
     })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then (this._renderResult);
   }
 
   patchUserAvatar(url) {
@@ -104,12 +82,6 @@ export class Api {
         avatar: url
       })
     })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._renderResult);
   }
 }
