@@ -74,7 +74,8 @@ function handleSubmitAddCard(inputValues) {
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  });
+  })
+  .finally(() => popupAddCard.renderLoading("Создать"));
 }
 
 //Ручка открытия попапа для редактирования профиля
@@ -107,7 +108,8 @@ function handleSubmitEditAvatar(inputValues) {
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  });
+  })
+  .finally(() => popupEditAvatar.renderLoading("Сохранить"));
 }
 
 //Ручка сохранения изменений профиля
@@ -119,7 +121,8 @@ function handleSubmitEditProfile(inputValues) {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => popupEditProfile.renderLoading("Сохранить"));
 }
 
 

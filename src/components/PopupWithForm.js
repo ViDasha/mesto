@@ -16,11 +16,16 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
+  renderLoading(textMessage) {
+      this._popupForm.querySelector('.popup__button-save').textContent = textMessage;
+  }
+
   setEventListeners() {
     super.setEventListeners();
     //обработчик сабмита формы
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this.renderLoading("Сохранение...");
       this._formSubmit(this._getInputValues());
     });
   }
