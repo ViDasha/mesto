@@ -84,4 +84,24 @@ export class Api {
     })
     .then(this._renderResult);
   }
+
+  putCardLike(id) {
+    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then (this._renderResult);
+  }
+
+  deleteCardLike(id) {
+    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then (this._renderResult);
+  }
 }
