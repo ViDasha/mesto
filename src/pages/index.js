@@ -1,6 +1,6 @@
 import './index.css';
 
-import { initialCards, listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton, profileAvatar, popupEditAvatarForm } from '../components/initialData.js';
+import { listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton, profileAvatar, popupEditAvatarForm } from '../components/initialData.js';
 
 import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
