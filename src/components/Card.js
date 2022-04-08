@@ -16,10 +16,16 @@ export class Card {
 
     return cardElement;
   }
-
+//сделать два метода в индекс для api добавления и удаления, 
+//сделать здесь общий метод, который пройдется по массиву лайков и найдет лайк от пользователя
   _handleDoLike(evt) {
     const elementLike = evt.target;
     elementLike.classList.add('element__like_active');
+  }
+
+  _handleHideLike(evt) {
+    const elementLike = evt.target;
+    elementLike.classList.remove('element__like_active');
   }
 
   handleDeleteCard() {
@@ -32,6 +38,7 @@ export class Card {
     });
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
       this._handleDoLike(evt);
+      //Здесь общий метод по поиску лайка, он вызовет внешние ручки
     });
     this._element.querySelector('.element__basket').addEventListener('click', (evt) => {
       this._handleOpenFormDelete(this._data);
@@ -45,6 +52,7 @@ export class Card {
     this._element.querySelector('.element__image').src = this._data.link;
     this._element.querySelector('.element__image').alt = this._data.name;
     this._element.querySelector('.element__name').textContent = this._data.name;
+    //здесь тоже общий метод по поиску лайка
     this._element.querySelector('.element__count-like').textContent = this._data.likes.length;
 
     if (this._data.owner._id != this._userId) {
