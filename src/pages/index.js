@@ -1,6 +1,6 @@
 import './index.css';
 
-import { listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton, profileAvatar, popupEditAvatarForm } from '../components/initialData.js';
+import { listValidationAttribute, popupEditForm, editButton, popupEditName, popupEditAbout, popupAddForm, addButton, profileAvatar, popupEditAvatarForm } from '../utils/initialData.js';
 
 import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
@@ -47,6 +47,7 @@ function handleCardDelete(card) {
 //Ручка открытия попапа удаления карточки
 function handleOpenFormDelete(card) {
   popupCardDelete.open(card);
+  popupCardDelete.changeSubmitFunction(handleCardDelete.bind(this));
 }
 
 let methodLike = 'PUT';
@@ -199,7 +200,7 @@ const popupWithImage = new PopupWithImage('pp-img');
 popupWithImage.setEventListeners();
 
 //Класс попапа для удаления карточки
-const popupCardDelete = new PopupWithConfirmation('pp-delete', handleCardDelete);
+const popupCardDelete = new PopupWithConfirmation('pp-delete');
 popupCardDelete.setEventListeners();
 
 //Запуск валидации всех форм
