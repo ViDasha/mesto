@@ -30,7 +30,7 @@ export class Card {
     this._likeButton.classList.remove('element__like_active');
   }
 
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this._element.remove();
   }
 
@@ -63,7 +63,7 @@ export class Card {
       //Здесь общий метод по поиску лайка, он вызовет внешние ручки
     });
     this._basket.addEventListener('click', (evt) => {
-      this._handleOpenFormDelete(this._data);
+      this._handleOpenFormDelete(this);
     });
   }
 
@@ -79,7 +79,7 @@ export class Card {
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
     this._cardName.textContent = this._data.name;
-    
+  
     this._changeLike();
 
     this._countLikes();

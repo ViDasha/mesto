@@ -1,8 +1,7 @@
 export class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._authorization = options.headers.authorization;
-    this._contentType = options.headers["Content-Type"];
+    this._headers = options.headers;
   }
 
   _renderResult(res) {
@@ -16,17 +15,14 @@ export class Api {
 
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
-      headers: {
-        authorization: this._authorization
-      } })
+      headers: this._headers 
+    })
       .then(this._renderResult);
   }
 
   getUserProfile() {
     return fetch(this._baseUrl + '/users/me', {
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
     .then(this._renderResult);
   }
@@ -34,10 +30,7 @@ export class Api {
   patchUserInfo(info) {
     return fetch(this._baseUrl + '/users/me', {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: info.name,
         about: info.about
@@ -49,10 +42,7 @@ export class Api {
   postNewCard(info) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: info.name,
         link: info.link
@@ -64,9 +54,7 @@ export class Api {
   deleteCard(id) {
     return fetch(this._baseUrl + '/cards/' + id, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
     .then (this._renderResult);
   }
@@ -74,10 +62,7 @@ export class Api {
   patchUserAvatar(url) {
     return fetch(this._baseUrl + '/users/me/avatar', {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: url
       })
@@ -88,9 +73,7 @@ export class Api {
   changeCardLike(id, method) {
     return fetch(this._baseUrl + '/cards/' + id + '/likes', {
       method: method,
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
     .then (this._renderResult);
   }

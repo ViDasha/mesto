@@ -33,10 +33,10 @@ function handleCardClick(data) {
 }
 
 //Ручка удаления карточки
-function handleCardDelete(cardId) {
-  api.deleteCard(cardId)
+function handleCardDelete(card) {
+  api.deleteCard(card.getId())
   .then(() => {
-    this.handleDeleteCard();
+    card.handleDeleteCard();
     popupCardDelete.close();
   })
   .catch((err) => {
@@ -45,9 +45,8 @@ function handleCardDelete(cardId) {
 }
 
 //Ручка открытия попапа удаления карточки
-function handleOpenFormDelete(data) {
-  popupCardDelete.open(data);
-  popupCardDelete.changeSubmitFunction(handleCardDelete.bind(this));
+function handleOpenFormDelete(card) {
+  popupCardDelete.open(card);
 }
 
 let methodLike = 'PUT';
@@ -60,7 +59,7 @@ function handleLike(card) {
   }
   api.changeCardLike(card.getId(), methodLike)
   .then((result) => {
-    this.updateCard(result);
+    card.updateCard(result);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -206,7 +205,7 @@ const popupWithImage = new PopupWithImage('pp-img');
 popupWithImage.setEventListeners();
 
 //Класс попапа для удаления карточки
-const popupCardDelete = new PopupWithConfirmation('pp-delete');
+const popupCardDelete = new PopupWithConfirmation('pp-delete', handleCardDelete);
 popupCardDelete.setEventListeners();
 
 //Запуск валидации всех форм
