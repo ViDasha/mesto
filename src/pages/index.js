@@ -155,27 +155,21 @@ const api = new Api({
 //Класс с информацией о пользователе
 const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__avatar-img');
 
-//Получение данных пользователя и отображение на странице
-api.getUserProfile()
-  .then((result) => {
-    userInfo.setUserInfo(result);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
 //Генерация секции с карточками
 const cardList = new Section({
   renderer: handleRendererCard
 }, '.elements');
 
-//Загрузка карточек с сервера и отрисовка
-api.getInitialCards()
-  .then((result) => {
-    // обрабатываем результат
-    cardList.renderItems(result);
+//Получение данных пользователя и загрузка карточек с сервера
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+      // тут установка данных пользователя
+      userInfo.setUserInfo(userData);
+      // и тут отрисовка карточек
+      cardList.renderItems(cards);
   })
-  .catch((err) => {
+  .catch(err => {
+    // тут ловим ошибку
     console.log(err); // выведем ошибку в консоль
   });
 
