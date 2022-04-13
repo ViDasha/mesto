@@ -126,7 +126,7 @@ function handleOpenEditAvatar() {
 function handleSubmitEditAvatar(inputValues) {
   api.patchUserAvatar(inputValues.link)
   .then((result) => {
-    userInfo.setUserAvatar(result.avatar);
+    userInfo.setUserInfo(result);
     popupEditAvatar.close();
   })
   .catch((err) => {
@@ -139,7 +139,7 @@ function handleSubmitEditAvatar(inputValues) {
 function handleSubmitEditProfile(inputValues) {
   api.patchUserInfo(inputValues)
     .then((result) => {
-      userInfo.setUserInfo({ name: result.name, about: result.about });
+      userInfo.setUserInfo(result);
       popupEditProfile.close();
     })
     .catch((err) => {
@@ -164,8 +164,7 @@ const userInfo = new UserInfo('.profile__name', '.profile__about', '.profile__av
 //Получение данных пользователя и отображение на странице
 api.getUserProfile()
   .then((result) => {
-    userInfo.setUserInfo({ name: result.name, about: result.about, _id: result._id });
-    userInfo.setUserAvatar(result.avatar);
+    userInfo.setUserInfo(result);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль

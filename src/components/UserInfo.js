@@ -7,7 +7,7 @@ export class UserInfo {
 
   //Возвращает объект с данными пользователя
   getUserInfo() {
-    return { name: this._name.textContent, about: this._about.textContent, _id: this._id };
+    return { name: this._name.textContent, about: this._about.textContent, avatar: this._avatar.src, _id: this._id };
   }
 
   //Принимает данные пользователя и добавляет их на страницу
@@ -15,10 +15,11 @@ export class UserInfo {
     this._name.textContent = info.name;
     this._about.textContent = info.about;
     this._id = info._id;
+    this._avatar.src = info.avatar;
   }
 
-  //Принимает аватар пользователя и добавляет его на страницу
+  /*//Принимает аватар пользователя и добавляет его на страницу
   setUserAvatar(img) {
     this._avatar.src = img;
-  }
+  }*/
 }
