@@ -50,20 +50,15 @@ function handleOpenFormDelete(data) {
   popupCardDelete.changeSubmitFunction(handleCardDelete.bind(this));
 }
 
-//Ручка для отправки запроса на постановку лайка
-function handleDoLike(cardId) {
-  api.putCardLike(cardId)
-  .then((result) => {
-    this.updateCard(result);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-}
-
-//Ручка для отправки запроса на удаление лайка
-function handleDeleteLike(cardId) {
-  api.deleteCardLike(cardId)
+let methodLike = 'PUT';
+//Ручка для отправки запроса на постановку/удаление лайка
+function handleLike(card) {
+  if (card.isLiked()) {
+    methodLike = 'DELETE';
+  } else {
+    methodLike = 'PUT';
+  }
+  api.changeCardLike(card.getId(), methodLike)
   .then((result) => {
     this.updateCard(result);
   })
@@ -75,7 +70,7 @@ function handleDeleteLike(cardId) {
 //Создание карточки
 function createCard(data) {
   const card = new Card(data, '#element', userInfo.getUserInfo()._id, handleCardClick, 
-                          handleOpenFormDelete, handleDoLike, handleDeleteLike);
+                          handleOpenFormDelete, handleLike);
   const newElement = card.generateCard();
 
   return newElement;
